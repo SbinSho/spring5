@@ -4,24 +4,31 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import assembler.Assembler;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import config.AppCtx;
 import spring.ChangePasswordService;
 import spring.DuplicateMemberException;
-import spring.MemberDao;
+import spring.MemberInfoPrinter;
+import spring.MemberListPrinter;
 import spring.MemberNotFoundException;
 import spring.MemberRegisterService;
 import spring.RegisterRequest;
+import spring.VersionPrinter;
 import spring.WrongIdPasswordException;
 
-public class MainForAssembler {
+public class MainForSpring {
 
+	private static ApplicationContext ctx = null;
+	
 	public static void main(String[] args) throws IOException {
+		ctx = new AnnotationConfigApplicationContext(AppCtx.class);
+		
 		BufferedReader reader = 
 				new BufferedReader(new InputStreamReader(System.in));
-		
 		while (true) {
 			System.out.println("명령어를 입력하세요:");
-			
 			String command = reader.readLine();
 			if (command.equalsIgnoreCase("exit")) {
 				System.out.println("종료합니다.");
@@ -33,21 +40,28 @@ public class MainForAssembler {
 			} else if (command.startsWith("change ")) {
 				processChangeCommand(command.split(" "));
 				continue;
+			} else if (command.equals("list")) {
+				processListCommand();
+				continue;
+			} else if (command.startsWith("info ")){
+				processInfoCommand(command.split(" "));
+				continue;
+			} else if (command.startsWith("version")) {
+				processVersionCommand();
+				continue;
 			}
 			printHelp();
 		}
 	}
-
-	private static Assembler assembler = new Assembler();
 
 	private static void processNewCommand(String[] arg) {
 		if (arg.length != 5) {
 			printHelp();
 			return;
 		}
-		MemberRegisterService regSvc = assembler.getMemberRegisterService();
+		MemberRegisterService regSvc = 
+				ctx.getBean("memberRegSvc", MemberRegisterService.class);
 		RegisterRequest req = new RegisterRequest();
-		
 		req.setEmail(arg[1]);
 		req.setName(arg[2]);
 		req.setPassword(arg[3]);
@@ -57,7 +71,6 @@ public class MainForAssembler {
 			System.out.println("암호와 확인이 일치하지 않습니다.\n");
 			return;
 		}
-		
 		try {
 			regSvc.regist(req);
 			System.out.println("등록했습니다.\n");
@@ -72,7 +85,7 @@ public class MainForAssembler {
 			return;
 		}
 		ChangePasswordService changePwdSvc = 
-				assembler.getChangePasswordService();
+				ctx.getBean("changePwdSvc", ChangePasswordService.class);
 		try {
 			changePwdSvc.changePassword(arg[1], arg[2], arg[3]);
 			System.out.println("암호를 변경했습니다.\n");
@@ -82,7 +95,33 @@ public class MainForAssembler {
 			System.out.println("이메일과 암호가 일치하지 않습니다.\n");
 		}
 	}
+	
+	private static void processListCommand() {
+		MemberListPrinter listPrinter = 
+				ctx.getBean("listPrinter", MemberListPrinter.class);
+		listPrinter.printAll();
+	}
 
+	private static void processInfoCommand(String[] arg) {
+		
+		if(arg.length != 2) {
+			printHelp();
+			return;
+		}
+		
+		MemberInfoPrinter infoPrinter = 
+				ctx.getBean("infoPrinter", MemberInfoPrinter.class);
+		
+		infoPrinter.printMemberInfo(arg[1]);
+		
+	}
+	
+	private static void processVersionCommand() {
+		VersionPrinter versionPrinter = 
+				ctx.getBean("versionPrinter", VersionPrinter.class);
+		
+		versionPrinter.print();
+	}
 	private static void printHelp() {
 		System.out.println();
 		System.out.println("잘못된 명령입니다. 아래 명령어 사용법을 확인하세요.");
@@ -91,4 +130,6 @@ public class MainForAssembler {
 		System.out.println("change 이메일 현재비번 변경비번");
 		System.out.println();
 	}
+
+
 }
