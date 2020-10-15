@@ -8,7 +8,7 @@ public class Main2 {
 		
 		AnnotationConfigApplicationContext ctx = 
 				new AnnotationConfigApplicationContext(AppContext.class);
-		
+		 
 		Greeter g1 = ctx.getBean("greeter", Greeter.class);
 		Greeter g2 = ctx.getBean("greeter1", Greeter.class);
 		
