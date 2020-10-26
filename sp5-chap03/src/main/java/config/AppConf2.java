@@ -18,7 +18,7 @@ public class AppConf2 {
 	private MemberDao memberDao;
 	@Autowired
 	private MemberPrinter memberPrinter;
-
+	
 	@Bean
 	public MemberRegisterService memberRegSvc() {
 		return new MemberRegisterService(memberDao);

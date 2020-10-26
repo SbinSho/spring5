@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import config.AppConflmport;
 import config.AppCtx;
 import spring.ChangePasswordService;
 import spring.DuplicateMemberException;
@@ -24,7 +23,7 @@ public class MainForSpring {
 	private static ApplicationContext ctx = null;
 	
 	public static void main(String[] args) throws IOException {
-		ctx = new AnnotationConfigApplicationContext(AppConflmport.class);
+		ctx = new AnnotationConfigApplicationContext(AppCtx.class);
 		
 		BufferedReader reader = 
 				new BufferedReader(new InputStreamReader(System.in));
@@ -44,10 +43,10 @@ public class MainForSpring {
 			} else if (command.equals("list")) {
 				processListCommand();
 				continue;
-			} else if (command.startsWith("info ")){
+			} else if (command.startsWith("info ")) {
 				processInfoCommand(command.split(" "));
 				continue;
-			} else if (command.startsWith("version")) {
+			} else if (command.equals("version")) {
 				processVersionCommand();
 				continue;
 			}
@@ -96,33 +95,7 @@ public class MainForSpring {
 			System.out.println("이메일과 암호가 일치하지 않습니다.\n");
 		}
 	}
-	
-	private static void processListCommand() {
-		MemberListPrinter listPrinter = 
-				ctx.getBean("listPrinter", MemberListPrinter.class);
-		listPrinter.printAll();
-	}
 
-	private static void processInfoCommand(String[] arg) {
-		
-		if(arg.length != 2) {
-			printHelp();
-			return;
-		}
-		
-		MemberInfoPrinter infoPrinter = 
-				ctx.getBean("infoPrinter", MemberInfoPrinter.class);
-		
-		infoPrinter.printMemberInfo(arg[1]);
-		
-	}
-	
-	private static void processVersionCommand() {
-		VersionPrinter versionPrinter = 
-				ctx.getBean("versionPrinter", VersionPrinter.class);
-		
-		versionPrinter.print();
-	}
 	private static void printHelp() {
 		System.out.println();
 		System.out.println("잘못된 명령입니다. 아래 명령어 사용법을 확인하세요.");
@@ -132,5 +105,26 @@ public class MainForSpring {
 		System.out.println();
 	}
 
+	private static void processListCommand() {
+		MemberListPrinter listPrinter = 
+				ctx.getBean("listPrinter", MemberListPrinter.class);
+		listPrinter.printAll();
+	}
+
+	private static void processInfoCommand(String[] arg) {
+		if (arg.length != 2) {
+			printHelp();
+			return;
+		}
+		MemberInfoPrinter infoPrinter = 
+				ctx.getBean("infoPrinter", MemberInfoPrinter.class);
+		infoPrinter.printMemberInfo(arg[1]);
+	}
+	
+	private static void processVersionCommand() {
+		VersionPrinter versionPrinter = 
+				ctx.getBean("versionPrinter", VersionPrinter.class);
+		versionPrinter.print();
+	}
 
 }
