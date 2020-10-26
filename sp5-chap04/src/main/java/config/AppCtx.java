@@ -10,6 +10,7 @@ import spring.MemberInfoPrinter;
 import spring.MemberListPrinter;
 import spring.MemberPrinter;
 import spring.MemberRegisterService;
+import spring.MemberSummaryPrinter;
 import spring.VersionPrinter;
 
 @Configuration
@@ -30,19 +31,21 @@ public class AppCtx {
 		return new ChangePasswordService();
 	}
 	
-	@Bean
-	public MemberPrinter memberPrinter() {
-		return new MemberPrinter();
-	}
+//	@Bean
+//	public MemberPrinter memberPrinter() {
+//		return new MemberPrinter();
+//	}
 	
 	@Bean
 	@Qualifier("printer")
 	public MemberPrinter memberPrinter1() {
 		return new MemberPrinter();
 	}
+	
 	@Bean
+	@Qualifier("summaryPrinter")
 	public MemberPrinter memberPrinter2() {
-		return new MemberPrinter();
+		return new MemberSummaryPrinter();
 	}
 	
 	@Bean
@@ -52,6 +55,8 @@ public class AppCtx {
 	
 	@Bean
 	public MemberInfoPrinter infoPrinter() {
+		MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
+		infoPrinter.setPrinter(memberPrinter2());
 		return new MemberInfoPrinter();
 	}
 	
