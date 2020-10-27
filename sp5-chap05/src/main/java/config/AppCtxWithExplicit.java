@@ -5,14 +5,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import spring.MemberDao;
 import spring.MemberPrinter;
 import spring.MemberSummaryPrinter;
 import spring.VersionPrinter;
 
 @Configuration
 @ComponentScan(basePackages = {"spring"})
-public class AppCtx {
+public class AppCtxWithExplicit {
 
+	@Bean
+	public MemberDao memberDao2() {
+		MemberDao memberDao = new MemberDao();
+		System.out.println("explicit : " + memberDao);
+		return memberDao;
+	}
+	
 	@Bean
 	@Qualifier("printer")
 	public MemberPrinter memberPrinter1() {

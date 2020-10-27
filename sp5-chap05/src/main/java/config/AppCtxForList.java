@@ -10,8 +10,8 @@ import spring.MemberSummaryPrinter;
 import spring.VersionPrinter;
 
 @Configuration
-@ComponentScan(basePackages = {"spring"})
-public class AppCtx {
+@ComponentScan(basePackages = {"spring", "spring2"})
+public class AppCtxForList {
 
 	@Bean
 	@Qualifier("printer")
