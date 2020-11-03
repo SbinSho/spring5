@@ -7,9 +7,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.aspectj.lang.Signature;
 
 @Aspect
+@Order(1)
 public class ExeTimeAspect {
 
 	@Pointcut("execution(public * chap07..*(..))")
@@ -21,8 +23,7 @@ public class ExeTimeAspect {
 	public Object meaure(ProceedingJoinPoint joinPoint) throws Throwable{
 		
 		long start = System.nanoTime();
-		
-		try {
+		try { 
 			Object result = joinPoint.proceed();
 			return result;
 		} finally {	
