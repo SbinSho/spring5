@@ -28,7 +28,7 @@ public class MemberDao {
 		List<Member> results = jdbcTemplate.query("select * from MEMBER where EMAIL = ?",
 				new RowMapper<Member>() {
 						@Override
-						public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+						public Member mapRow(ResultSet rs, int rowNum)  throws SQLException {
 							Member member = new Member(
 									rs.getString("EMAIL"), 
 									rs.getString("PASSWORD"), 
