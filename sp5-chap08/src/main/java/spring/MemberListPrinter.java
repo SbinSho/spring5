@@ -1,6 +1,6 @@
 package spring;
 
-import java.util.Collection;
+import java.util.List;
 
 public class MemberListPrinter {
 
@@ -13,7 +13,7 @@ public class MemberListPrinter {
 	}
 
 	public void printAll() {
-		Collection<Member> members = memberDao.selectAll();
+		List<Member> members = memberDao.selectAll();
 		members.forEach(m -> printer.print(m));
 	}
 
