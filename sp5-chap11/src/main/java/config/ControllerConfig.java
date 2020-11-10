@@ -1,4 +1,4 @@
-package config;
+ package config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,13 +11,14 @@ import spring.MemberRegisterService;
 public class ControllerConfig {
 
 	@Autowired
-	private MemberRegisterService memberRegSvc;
-
+	private MemberRegisterService memberRegsvc;
+	
 	@Bean
 	public RegisterController registerController() {
 		RegisterController controller = new RegisterController();
-		controller.setMemberRegisterService(memberRegSvc);
+		controller.setMemberRegisterServce(memberRegsvc);
 		return controller;
 	}
+	
 	
 }
