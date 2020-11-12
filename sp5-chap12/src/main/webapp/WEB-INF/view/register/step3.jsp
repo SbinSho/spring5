@@ -8,10 +8,8 @@
 </head>
 <body>
     <p>
-        <spring:message code="register.done">
-        	<spring:argument value="${registerRequest.name}" />
-        	<spring:argument value="${registerRequest.email}" />
-        </spring:message>
+        <spring:message code="register.done"
+        	arguments="${registerRequest.name}"/>
     </p>
     <p>
         <a href="<c:url value='/main'/>">

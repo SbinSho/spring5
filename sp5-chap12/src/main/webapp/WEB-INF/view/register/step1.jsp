@@ -10,7 +10,7 @@
 	<p>약관 내용</p>
 	<form action="step2" method="post">
 	<label>
-		<input type="checkbox" name="agree" value="true1">
+		<input type="checkbox" name="agree" value="true">
 		<spring:message code="term.agree"/>
 	</label>
 	<input type="submit" value='<spring:message code="next.btn"/>'/>
