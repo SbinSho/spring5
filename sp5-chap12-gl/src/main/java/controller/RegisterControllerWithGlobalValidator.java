@@ -1,5 +1,7 @@
 package controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,11 +15,13 @@ import spring.MemberRegisterService;
 import spring.RegisterRequest;
 
 @Controller
-public class RegisterController {
-	
+@RequestMapping("/global")
+public class RegisterControllerWithGlobalValidator {
+
 	private MemberRegisterService memberRegisterService;
-	
-	public void setMemberRegisterServce(MemberRegisterService memberRegisterService) {
+
+	public void setMemberRegisterService(
+			MemberRegisterService memberRegisterService) {
 		this.memberRegisterService = memberRegisterService;
 	}
 
@@ -25,35 +29,35 @@ public class RegisterController {
 	public String handleStep1() {
 		return "register/step1";
 	}
-	
+
 	@PostMapping("/register/step2")
-	public String handleStep2(@RequestParam("agree") Boolean agree, Model model) {
-		if(!agree) {
+	public String handleStep2(
+			@RequestParam(value = "agree", defaultValue = "false") Boolean agree,
+			Model model) {
+		if (!agree) {
 			return "register/step1";
 		}
 		model.addAttribute("registerRequest", new RegisterRequest());
 		return "register/step2";
 	}
-	
+
 	@GetMapping("/register/step2")
 	public String handleStep2Get() {
 		return "redirect:/register/step1";
 	}
-	
+
 	@PostMapping("/register/step3")
-	public String handleStep3(RegisterRequest regReq, Errors errors) {
-		new RegisterRequestValidator().validate(regReq, errors);
-		if(errors.hasErrors())
+	public String handleStep3(@Valid RegisterRequest regReq, Errors errors) {
+		if (errors.hasErrors())
 			return "register/step2";
+
 		try {
-			
 			memberRegisterService.regist(regReq);
 			return "register/step3";
-			
-		} catch (DuplicateMemberException e) {
+		} catch (DuplicateMemberException ex) {
 			errors.rejectValue("email", "duplicate");
 			return "register/step2";
 		}
 	}
-	
+
 }

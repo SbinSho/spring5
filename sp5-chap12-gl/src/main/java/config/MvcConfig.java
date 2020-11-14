@@ -18,6 +18,11 @@ import controller.RegisterRequestValidator;
 public class MvcConfig implements WebMvcConfigurer {
 
 	@Override
+	public Validator getValidator() {
+		return new RegisterRequestValidator();
+	}
+
+	@Override
 	public void configureDefaultServletHandling(
 			DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -32,13 +37,15 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/main").setViewName("main");
 	}
-	
+
 	@Bean
 	public MessageSource messageSource() {
-		ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
-		ms.setBasename("message.label");
+		ResourceBundleMessageSource ms = 
+				new ResourceBundleMessageSource();
+		ms.setBasenames("message.label");
 		ms.setDefaultEncoding("UTF-8");
 		return ms;
 	}
 
- }
+	
+}
