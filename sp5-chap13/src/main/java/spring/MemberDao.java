@@ -24,6 +24,7 @@ public class MemberDao {
 	}
 
 	public Member selectByEmail(String email) {
+		System.out.println("memberDao 진입완료");
 		List<Member> results = jdbcTemplate.query(
 				"select * from MEMBER where EMAIL = ?",
 				new RowMapper<Member>() {

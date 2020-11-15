@@ -8,7 +8,7 @@ public class ChangePasswordService {
 
 	@Transactional
 	public void changePassword(String email, String oldPwd, String newPwd) {
-		Member member = memberDao.selectByEmail(email);
+		Member member = memberDao.selectByEmail("tt");
 		if (member == null)
 			throw new MemberNotFoundException();
 
