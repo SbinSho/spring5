@@ -62,4 +62,6 @@ public class MemberConfig {
 		authService.setMemberDao(memberDao());
 		return authService;
 	}
+	
+	
 }
