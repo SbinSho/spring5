@@ -1,4 +1,4 @@
-## Spring5
+## Spring5 👋
 #### 저자 최범균님의 초보 웹 개발자를 위한 스프링5 프로그래밍 입문 책을 이용하여, spring framework 공부 목적을 위한 프로젝트 입니다.
 
 ## Project Info :punch:
