@@ -41,12 +41,16 @@
       * 컨트롤러 요청 매핑, 커맨드 객체 폼 처리
     * sp5-chap12
       * 메시지, 커맨드 객체 검증 예제
-    * sp5-chap12-bv
-      * Validation API 검증 예제
+    * sp5-chap12-bv, sp5-chap12-gl
+      * Validation API 검증 예제, Validation 글로벌 적용
     * sp5-chap13
       * 세션, 쿠키, 인터셉터 예제
     * sp5-chap14
       * 날짜 값 변환, @PathVariable, 익셉션 처리 예제
+    * sp5-chap15
+      * JSON 응답, 요청 처리 예제
+    * sp5-chap17
+      * 프로필, 프로퍼티 예제
 
 ## Browsers support :tv:
 
