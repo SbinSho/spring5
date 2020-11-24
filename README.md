@@ -1,5 +1,5 @@
 ## spring5
-#### 초보 웹 개발자를 위한 스프링5 프로그래밍 입문 책을 이용하여, spring framework 공부 목적을 위한 프로젝트 입니다.
+#### 저자 최범균님의 초보 웹 개발자를 위한 스프링5 프로그래밍 입문 책을 이용하여, spring framework 공부 목적을 위한 프로젝트 입니다.
 
 ## Project Info :punch:
 1. 개발 환경
@@ -38,8 +38,15 @@
     * sp5-chap10
       * 스프링 MVC 구성 요소
     * sp5-chap11
-      * 컨트롤러 요청 매핑, 커맨드 객체 폼 처리 
-    
+      * 컨트롤러 요청 매핑, 커맨드 객체 폼 처리
+    * sp5-chap12
+      * 메시지, 커맨드 객체 검증 예제
+    * sp5-chap12-bv
+      * Validation API 검증 예제
+    * sp5-chap13
+      * 세션, 쿠키, 인터셉터 예제
+    * sp5-chap14
+      * 날짜 값 변환, @PathVariable, 익셉션 처리 예제
 
 ## Browsers support :tv:
 
