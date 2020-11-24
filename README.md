@@ -7,11 +7,10 @@
       - HTML5 + CSS3
       - javascript
       - java
-   * os & tools & etc
+   * os & tools
       - windows 10
       - Eclipse-mars
       - Apache Tomcat 8.0
-      - gradle
       
 2. 실행 환경
     * windows 10
