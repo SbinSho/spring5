@@ -45,7 +45,7 @@
     * sp5-chap13
       * 세션, 쿠키, 인터셉터 예제
     * sp5-chap14
-      * 날짜 값 변환, @PathVariable, 익셉션 처리 예제
+      * 날짜 값 변환, 익셉션 처리 예제
     * sp5-chap15
       * JSON 응답, 요청 처리 예제
     * sp5-chap17
